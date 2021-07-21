@@ -1,15 +1,18 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import ListToDo from './components/ListToDo/ListToDo';
 import Login from './components/Login/Login';
 import CreateToDo from './components/CreateToDo/CreateToDo';
+import Header from './components/Header/Header';
 
 function App() {
   return (
-    <div className="">
+    <div>
       <Router>
-        <h2>To Do App</h2>
+        <Header />
         <div className="container">
           <Switch>
             <Route path="/" exact component={Login}></Route>

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import './ListToDo.css';
 
 import ToDoItem from "../ToDoItem/ToDoItem";
 import Card from "../UI/Card/Card";
+
 
 class ListToDo extends Component {  
 
@@ -61,18 +63,20 @@ class ListToDo extends Component {
                     </div>
                 </div>
 
-                <Card className="todo-list-card">
-                    {
-                        this.state.todos.map ( todo =>
-                            <ToDoItem 
-                                key={todo.id}
-                                description={todo.description}
-                                deadline={todo.deadline}
-                                done={todo.done}
-                            />
-                        )
-                    }
-                </Card>
+                <div className="row">
+                    <div className="todo-list-card">
+                        {
+                            this.state.todos.map ( todo =>
+                                <ToDoItem 
+                                    key={todo.id}
+                                    description={todo.description}
+                                    deadline={todo.deadline}
+                                    done={todo.done}
+                                />
+                            )
+                        }
+                    </div>
+                </div>
             </div>
         );
     }

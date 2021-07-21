@@ -9,7 +9,7 @@ class Login extends Component {
 
         }
 
-
+        this.login = this.login.bind(this);
     }
 
     login() {
@@ -18,10 +18,10 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
-                <div className="btn btn-primary" onClick={this.addTask}> 
-                        Login
-                    </div>
+            <div className="text-center">
+                <div className="btn btn-primary" onClick={this.login}> 
+                    Login
+                </div>
             </div>
         );
     }
