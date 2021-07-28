@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import './ListToDo.css';
 
 import ToDoItem from "../ToDoItem/ToDoItem";
-import Card from "../UI/Card/Card";
+import TaskService from "../../services/TaskService";
 
 
 class ListToDo extends Component {  
@@ -11,39 +11,17 @@ class ListToDo extends Component {
         super ( props )
 
         this.state = {
-            todos: [
-                {
-                    id: '1',
-                    description: "Need to do this",
-                    deadline: new Date (2021, 7, 20),
-                    done: false
-                },
-                {
-                    id: '2',
-                    description: "Not so urgent ...",
-                    deadline: new Date (2021, 7, 23),
-                    done: true
-                },
-                {
-                    id: '3',
-                    description: "Minor task",
-                    deadline: new Date (2021, 7, 17),
-                    done: false
-                },
-                {
-                    id: '4',
-                    description: "Report to ...",
-                    deadline: new Date (2021, 7, 30),
-                    done: false
-                }
-            ]
+            todos: []
         }
 
         this.addTask = this.addTask.bind(this);
     }
 
     componentDidMount() {
-        
+        TaskService.getTasks()
+        .then ( (res ) => {
+            this.setState ( { todos: res.data });
+        });
     }
 
     addTask() {
@@ -68,10 +46,10 @@ class ListToDo extends Component {
                         {
                             this.state.todos.map ( todo =>
                                 <ToDoItem 
-                                    key={todo.id}
+                                    key={todo.uuid}
                                     description={todo.description}
-                                    deadline={todo.deadline}
-                                    done={todo.done}
+                                    deadline={new Date (todo.created_on.substr(0, 10) )}
+                                    done={todo.is_done}
                                 />
                             )
                         }

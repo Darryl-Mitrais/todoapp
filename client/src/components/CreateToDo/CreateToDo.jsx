@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TaskService from '../../services/TaskService';
 
 class CreateToDo extends Component {
 
@@ -8,10 +9,11 @@ class CreateToDo extends Component {
         this.state = {
             id: this.props.match.params.id,
             description: '',
-            deadline: new Date()
+            deadline: new Date().toISOString().substr(0, 10)
         }
 
         this.descriptionUpdater = this.descriptionUpdater.bind(this);
+        this.deadlineUpdater = this.deadlineUpdater.bind(this);
         this.saveOrUpdateTask = this.saveOrUpdateTask.bind(this);
         this.cancel = this.cancel.bind(this);
     }
@@ -23,10 +25,25 @@ class CreateToDo extends Component {
         });
     }
 
+    deadlineUpdater = (event) => {
+        this.setState ( {
+            ...this.state,
+            deadline: event.target.value
+        });
+    }
+
     saveOrUpdateTask = (e) => {
         e.preventDefault();
 
-        this.props.history.push('/tasks');
+        let task = {
+            description: this.state.description,
+            deadline: this.state.deadline
+        }
+        
+        TaskService.createTask ( task )
+        .then ( ( response ) => {
+            this.props.history.push('/tasks');
+        });
     }
 
     cancel = (e) => {
@@ -59,7 +76,7 @@ class CreateToDo extends Component {
                                         <input type="date" 
                                             name="deadline"
                                             className="form-control"
-                                            value={this.state.deadline} />
+                                            value={this.state.deadline} onChange={this.deadlineUpdater} />
                                     </div>
 
                                     <button className="btn btn-success" 

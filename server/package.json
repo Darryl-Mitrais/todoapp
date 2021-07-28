@@ -1,0 +1,20 @@
+{
+  "name": "todoapp-server",
+  "version": "1.0.0",
+  "description": "todoapp server that handles request from todoapp client",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cristoforus Darryl",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12",
+    "pg": "^8.6.0",
+    "uuid": "^8.3.2"
+  }
+}
